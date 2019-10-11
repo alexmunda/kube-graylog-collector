@@ -1,6 +1,16 @@
 # kube-kube-graylog-collector
 Graylog collector for applications deployed to Kubernetes
 
+## Environment Variables
+
+`GELF_HOST` (REQUIRED) - The Graylog host that is responsible for receiving log messages. Within a Kubernetes cluster, it is usually `{namespace}.{graylog service name}` or just `{graylog service name}` if the collector and the graylog service reside in the same namespace.
+
+`GELF_PORT` (OPTIONAL) - The port that the Graylog host is listening on. Defaults to 12201.
+
+`FLUEND_ARGS` (OPTIONAL) - Any [fluentd](https://docs.fluentd.org/deployment/command-line-option) command line args. Log rotation is highly recommended. See the sample deployment for examples.
+
+Note: the protocol is currently hardcoded to UDP but can easily be changed to take in a TCP option if the need arises.
+
 ## Sample Deployment
 ```yml
 apiVersion: v1
